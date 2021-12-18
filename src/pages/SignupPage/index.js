@@ -1,89 +1,61 @@
-import React, { Component } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "../../components/General/Button";
 import css from "./style.module.css";
-import * as actions from "../../redux/actions/signupActions";
-import { connect } from "react-redux";
 import Spinner from "../../components/General/Spinner";
 import { Redirect } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
-class Signup extends Component {
-  state = {
-    email: "",
-    password1: "",
-    password2: "",
-    error: "",
-  };
+const Signup = (props) => {
+  const ctx = useContext(UserContext);
+  const [email, setemail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [error, setError] = useState("");
 
-  changeEmail = (e) => {
-    this.setState({ email: e.target.value });
-  };
+  useEffect(() => {
+    setPassword2(email);
+  }, [email]);
 
-  changePassword1 = (e) => {
-    this.setState({ password1: e.target.value });
-  };
-
-  changePassword2 = (e) => {
-    this.setState({ password2: e.target.value });
-  };
-
-  signup = () => {
-    if (this.state.password1 === this.state.password2) {
-      this.props.signupUser(this.state.email, this.state.password1);
+  const signup = () => {
+    if (password1 === password2) {
+      ctx.signupUser(email, password1);
     } else {
-      this.setState({ error: "Нууц үгнүүд хоорондоо таарахгүй байна!" });
+      setError("Нууц үгнүүд хоорондоо таарахгүй байна!");
     }
   };
 
-  render() {
-    return (
-      <div className={css.Signup}>
-        {this.props.userId && <Redirect to="/" />}
-        <h1>Бүртгэлийн форм</h1>
-        <div>Та өөрийн мэдээллээ оруулна уу</div>
-        <input
-          onChange={this.changeEmail}
-          type="text"
-          placeholder="Имэйл хаяг"
-        />
-        <input
-          onChange={this.changePassword1}
-          type="password"
-          placeholder="Нууц үгээ оруулна уу"
-        />
-        <input
-          onChange={this.changePassword2}
-          type="password"
-          placeholder="Нууц үгээ давтан оруулна уу"
-        />
-        {this.state.error && (
-          <div style={{ color: "red" }}>{this.state.error}</div>
-        )}
+  return (
+    <div className={css.Signup}>
+      {ctx.state.userId && <Redirect to="/" />}
+      <h1>Бүртгэлийн форм</h1>
 
-        {this.props.firebaseError && (
-          <div style={{ color: "red" }}>{this.props.firebaseError}</div>
-        )}
+      <div>Та өөрийн мэдээллээ оруулна уу</div>
+      <input
+        onChange={(e) => setemail(e.target.value)}
+        type="text"
+        placeholder="Имэйл хаяг"
+      />
+      <input
+        onChange={(e) => setPassword1(e.target.value)}
+        type="password"
+        placeholder="Нууц үгээ оруулна уу"
+      />
+      <input
+        onChange={(e) => setPassword2(e.target.value)}
+        type="password"
+        placeholder="Нууц үгээ давтан оруулна уу"
+      />
+      {error && <div style={{ color: "red" }}>{error}</div>}
 
-        {this.props.saving && <Spinner />}
+      {ctx.state.firebaseError && (
+        <div style={{ color: "red" }}>{ctx.state.firebaseError}</div>
+      )}
 
-        <Button text="БҮРТГҮҮЛЭХ" btnType="Success" daragdsan={this.signup} />
-      </div>
-    );
-  }
-}
+      {ctx.state.saving && <Spinner />}
 
-const mapStateToProps = (state) => {
-  return {
-    saving: state.signupLoginReducer.saving,
-    firebaseError: state.signupLoginReducer.firebaseError,
-    userId: state.signupLoginReducer.userId,
-  };
+      <Button text="БҮРТГҮҮЛЭХ" btnType="Success" daragdsan={signup} />
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signupUser: (email, password) =>
-      dispatch(actions.signupUser(email, password)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
