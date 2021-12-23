@@ -9,13 +9,13 @@ export const BurgerStore = (props) => {
       bacon: 0,
       meat: 0,
     },
-    totalPrice: 1000,
+    totalPrice: "",
     purchasing: false,
     ingredientNames: {
-      bacon: "Гахайн мах",
-      cheese: "Бяслаг",
-      meat: "Үхрийн мах",
-      salad: "Салад",
+      "Цахилгааны лаборатори": "Цахилгааны лаборатори",
+      "Програм хангамжийн лаборатори": "Програм хангамжийн лаборатори",
+      "Химийн лаборатори": "Химийн лаборатори",
+      "Механикын лаборатори": "Механикын лаборатори",
     },
     saving: false,
     finished: false,
@@ -66,9 +66,10 @@ export const BurgerStore = (props) => {
       ...Burger,
       ingredients: {
         ...Burger.ingredients,
-        [orts]: Burger.ingredients[orts] + 1,
+        [orts]: Burger.ingredients[orts],
       },
-      totalPrice: Burger.totalPrice + INGREDIENT_PRICES[orts],
+      // totalPrice: Burger.totalPrice + INGREDIENT_PRICES[orts],
+      totalPrice: orts,
       purchasing: true,
     });
   };

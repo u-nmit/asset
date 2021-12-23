@@ -4,6 +4,7 @@ import Burger from "../../components/Burger";
 import BuildControls from "../../components/BuildControls";
 import Modal from "../../components/General/Modal";
 import OrderSummary from "../../components/OrderSummary";
+import OrderPage from "../OrderPage";
 
 const BurgerPage = (props) => {
   const [confirmOrder, setConfirmOrder] = useState(false);
@@ -26,7 +27,7 @@ const BurgerPage = (props) => {
         <OrderSummary onCancel={closeConfirmModal} onContinue={continueOrder} />
       </Modal>
 
-      <Burger />
+      {/* <Burger /> */}
 
       <BuildControls showConfirmModal={showConfirmModal} />
     </div>

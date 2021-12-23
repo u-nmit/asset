@@ -6,18 +6,18 @@ const BuildControl = (props) => {
   return (
     <div className={css.BuildControl}>
       <div className={css.Label}>{props.orts}</div>
-      <button
+      {/* <button
         disabled={props.disabled[props.type]}
         onClick={() => burgerContext.removeIngredient(props.type)}
         className={css.Less}
       >
         Хасах
-      </button>
+      </button> */}
       <button
         onClick={() => burgerContext.addIngredient(props.type)}
         className={css.More}
       >
-        Нэмэх
+        Сонгох
       </button>
     </div>
   );

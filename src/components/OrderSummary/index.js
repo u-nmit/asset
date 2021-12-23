@@ -5,17 +5,18 @@ const OrderSummary = (props) => {
   const ctx = useContext(BurgerContext);
   return (
     <div>
-      <h3>Таны захиалга</h3>
-      <p>Таны сонгосон орцууд: </p>
-      <ul>
+      {/* <ul>
         {Object.keys(ctx.Burger.ingredients).map((el) => (
           <li key={el}>
             {ctx.Burger.ingredientNames[el]} : {ctx.Burger.ingredients[el]}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <p>
-        <strong>Захиалгын дүн: {ctx.Burger.totalPrice}₮ </strong>
+        <strong>
+          Таны сонгосон лаборатори:{" "}
+          <p style={{ color: "blue" }}>{ctx.Burger.totalPrice}</p>
+        </strong>
       </p>
       <p>Цаашаа үргэлжлүүлэх үү?</p>
       <Button daragdsan={props.onCancel} btnType="Danger" text="ТАТГАЛЗАХ" />

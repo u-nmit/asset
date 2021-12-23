@@ -85,15 +85,4 @@ const App = (props) => {
     </div>
   );
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     autoLogin: (token, userId) =>
-//       dispatch(actions.loginUserSuccess(token, userId)),
-
-//     logout: () => dispatch(logoutActions.logout()),
-//     autoLogout: () => dispatch(logoutActions.autoLogout()),
-//   };
-// };
-
 export default App;

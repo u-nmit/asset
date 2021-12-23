@@ -2,20 +2,22 @@ import React from "react";
 
 import css from "./style.module.css";
 
-const Order = props => {
+const Order = (props) => {
   return (
     <div className={css.Order}>
-      <p>
+      {/* <p>
         Орц : Гахайн мах : {props.order.orts.bacon}, Салад :{" "}
         {props.order.orts.salad}, Үхрийн мах : {props.order.orts.meet}, Бяслаг :{" "}
         {props.order.orts.cheese}
-      </p>
+      </p> */}
       <p>
-        Хаяг : {props.order.hayag.name} | {props.order.hayag.street} |
+        Нэр : {props.order.hayag.name} | Анги: {props.order.hayag.street} | Код:
         {props.order.hayag.city}
       </p>
       <p>
-        Үнийн дүн : <strong>{props.order.dun}₮</strong>
+        Аль Лабораториас : {props.order.dun}
+        <h1>Сонгосон зүйлс:</h1>
+        <strong>{props.order.request}</strong>
       </p>
     </div>
   );

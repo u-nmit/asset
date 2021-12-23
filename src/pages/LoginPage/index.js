@@ -4,6 +4,7 @@ import css from "./style.module.css";
 import Spinner from "../../components/General/Spinner";
 import { Redirect } from "react-router";
 import UserContext from "../../context/UserContext";
+import "./style.css";
 const Login = () => {
   const ctx = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -22,17 +23,58 @@ const Login = () => {
   };
 
   return (
-    <div className={css.Login}>
+    <div class="body">
       {ctx.state.userId ? <Redirect to="/orders" /> : null}
-      <input onChange={changeEmail} type="text" placeholder="Имэйл хаяг" />
-      <input onChange={changePassword} type="password" placeholder="Нууц үг" />
-      {ctx.state.firebaseError ? (
-        ctx.state.firebaseErrorCode === 400 ? (
-          <div style={{ color: "red" }}>Нууц үг буруу байна</div>
-        ) : null
-      ) : null}
-      {ctx.state.loginIn ? <Spinner /> : null}
-      <Button text="ЛОГИН" btnType="Success" daragdsan={login} />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="//fonts.googleapis.com/css?family=Aguafina+Script"
+      />
+      <div>
+        <div class="container">
+          <div class="login-container">
+            <div class="login-container-img">
+              <h1>
+                NEW MONGOL
+                <span>Institute of technology</span>
+              </h1>
+            </div>
+            <div class="login-container-content">
+              <div class="login-form">
+                <h1>Нэвтрэх</h1>
+                <p class="field">
+                  <label>Хэрэглэгчийн нэр</label>
+                  <input
+                    onChange={changeEmail}
+                    type="text"
+                    name="username"
+                    placeholder=""
+                  />
+                </p>
+                <p class="field">
+                  <label>Нууц үг</label>
+                  <input
+                    onChange={changePassword}
+                    type="password"
+                    name="password"
+                    placeholder=""
+                  />
+                  {/* <a href="">oublier mot de passe?</a> */}
+                </p>
+                {ctx.state.firebaseError ? (
+                  ctx.state.firebaseErrorCode === 400 ? (
+                    <div style={{ color: "red" }}>Нууц үг буруу байна</div>
+                  ) : null
+                ) : null}
+                {ctx.state.loginIn ? <Spinner /> : null}
+                <button onClick={login} type="" class="submitBtn">
+                  Нэвтрэх
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -10,8 +10,9 @@ const BuildControls = (props) => {
   }
   return (
     <div className={css.BuildControls}>
-      <p>
-        Бургерийн үнэ : <strong>{burgerContext.Burger.totalPrice}</strong>
+      <p style={{ color: "white" }}>
+        Таны сонгосон лаборатори :{" "}
+        <strong>{burgerContext.Burger.totalPrice}</strong>
       </p>
       {Object.keys(burgerContext.Burger.ingredientNames).map((el) => (
         <BuildControl
@@ -26,7 +27,7 @@ const BuildControls = (props) => {
         disabled={!burgerContext.Burger.purchasing}
         className={css.OrderButton}
       >
-        ЗАХИАЛАХ
+        Хүсэх
       </button>
     </div>
   );

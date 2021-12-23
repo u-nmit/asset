@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Burger from "../../components/Burger";
 import Button from "../../components/General/Button";
 import { Route } from "react-router-dom";
@@ -11,32 +11,40 @@ const ShippingPage = (props) => {
     props.history.goBack();
   };
 
-  const showContactData = () => {
+  // const showContactData = () => {
+  //   props.history.replace("/ship/contact");
+  // };
+  useEffect(() => {
     props.history.replace("/ship/contact");
-  };
+  }, []);
 
   return (
     <div className={css.ShippingPage}>
       <p style={{ fontSize: "24px" }}>
-        <strong>Таны захиалга амттай байх болно гэж найдаж байна...</strong>
+        <strong style={{ color: "white" }}>
+          {" "}
+          Та өөрийн нэр, анги, кодоо оруулна уу
+        </strong>
       </p>
       <p style={{ fontSize: "24px" }}>
-        <strong>Дүн: {ctx.Burger.totalPrice}₮</strong>
+        <strong style={{ color: "white" }}>
+          Сонгосон лаборатори: {ctx.Burger.totalPrice}₮
+        </strong>
       </p>
 
-      <Burger />
+      {/* <Burger /> */}
 
       <Button
         daragdsan={cancelOrder}
         btnType="Danger"
-        text="ЗАХИАЛГЫГ ЦУЦЛАХ"
+        text="ХҮСЭЛТИЙГ ЦУЦЛАХ"
       />
 
-      <Button
-        daragdsan={showContactData}
+      {/* <Button
+        // daragdsan={showContactData}
         btnType="Success"
         text="ХҮРГЭЛТИЙН МЭДЭЭЛЭЛ ОРУУЛАХ"
-      />
+      /> */}
 
       <Route path="/ship/contact">
         <ContactData />

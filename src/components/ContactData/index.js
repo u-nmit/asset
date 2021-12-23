@@ -5,6 +5,7 @@ import Spinner from "../General/Spinner";
 import { useHistory } from "react-router-dom";
 import BurgerContext from "../../context/Burgercontext";
 import UserContext from "../../context/UserContext";
+import "./style.css";
 const ContactData = (props) => {
   const history = useHistory();
   const userContext = useContext(UserContext);
@@ -12,6 +13,7 @@ const ContactData = (props) => {
   const [name, setName] = useState(null);
   const [city, setCity] = useState(null);
   const [street, setStreet] = useState(null);
+  const [request, setRequest] = useState(null);
   useEffect(() => {
     if (ctx.Burger.finished && !ctx.Burger.error) {
       history.replace("/orders");
@@ -33,19 +35,23 @@ const ContactData = (props) => {
     setName(e.target.value);
   };
 
-  const changeStreet = (e) => {
+  const changeClass = (e) => {
     setStreet(e.target.value);
   };
 
-  const changeCity = (e) => {
+  const changeCode = (e) => {
     setCity(e.target.value);
+  };
+  const changeRequest = (e) => {
+    setRequest(e.target.value);
   };
 
   const saveOrder = () => {
     const newOrder = {
-      orts: ctx.Burger.ingredients,
+      // orts: ctx.Burger.ingredients,
       dun: ctx.Burger.totalPrice,
       userId: userContext.state.userId,
+      request: request,
       hayag: {
         name: name,
         city: city,
@@ -58,38 +64,46 @@ const ContactData = (props) => {
 
   return (
     <div className={css.ContactData}>
-      <div ref={dunRef}>
-        <strong style={{ fontSize: "16px" }}>
-          Дүн : {ctx.Burger.totalPrice}₮
-        </strong>
-      </div>
+      <div ref={dunRef}></div>
       <div>
         {ctx.Burger.error &&
-          `Захиалгыг хадгалах явцад алдаа гарлаа : ${ctx.Burger.error}`}
+          `Хүсэлтйг хадгалах явцад алдаа гарлаа : ${ctx.Burger.error}`}
       </div>
       {ctx.Burger.saving ? (
         <Spinner />
       ) : (
         <div>
           <input
+            style={{ width: "70%" }}
             onChange={changeName}
             type="text"
             name="name"
             placeholder="Таны нэр"
           />
           <input
-            onChange={changeStreet}
+            style={{ width: "70%" }}
+            onChange={changeClass}
             type="text"
             name="street"
-            placeholder="Таны гэрийн хаяг"
+            placeholder="Таны анги"
           />
           <input
-            onChange={changeCity}
+            style={{ width: "70%" }}
+            onChange={changeCode}
             type="text"
             name="city"
-            placeholder="Таны хот"
+            placeholder="Таны код"
           />
-          <Button text="ИЛГЭЭХ" btnType="Success" daragdsan={saveOrder} />
+          <input
+            style={{ width: "70%" }}
+            onChange={changeRequest}
+            type="text"
+            name="request"
+            placeholder="Лабораториас авах зүйл"
+          />
+          <button onClick={saveOrder} type="" class="submitBtn">
+            Илгээх
+          </button>
         </div>
       )}
     </div>
